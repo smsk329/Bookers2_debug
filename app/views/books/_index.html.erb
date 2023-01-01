@@ -1,5 +1,5 @@
 <table class='table table-hover table-inverse'>
-  
+
   <thead>
     <tr>
       <th></th>
@@ -8,7 +8,7 @@
       <th colspan="4"></th>
     </tr>
   </thead>
-  
+
   <tbody>
     <% books.each do |book| %>
       <tr>
@@ -19,7 +19,7 @@
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
         <td>
-          
+
         <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
           <% if book.favorited_by?(current_user) %>
           <p>
@@ -27,7 +27,7 @@
               <span style="color:red;">♥︎</span><%= book.favorites.count %>
             <% end %>
           </p>
-          
+
         <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
           <% else %>
           <p>
@@ -37,9 +37,11 @@
           </p>
         <% end %>
         </td>
-        
+        <!--コメントの件数を表示-->
+        <td>コメント数:<%= book.book_comments.count %></td>
+
       </tr>
     <% end %>
   </tbody>
-  
+
 </table>
