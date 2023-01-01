@@ -5,7 +5,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   
@@ -18,6 +18,26 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
+        <td>
+          
+        <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+          <% if book.favorited_by?(current_user) %>
+          <p>
+            <%= link_to book_favorites_path(book.id)  , method: :delete do %>
+              <span style="color:red;">♥︎</span><%= book.favorites.count %>
+            <% end %>
+          </p>
+          
+        <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+          <% else %>
+          <p>
+            <%= link_to book_favorites_path(book.id), method: :post do %>
+              <span>♥</span><%= book.favorites.count %>
+            <% end %>
+          </p>
+        <% end %>
+        </td>
+        
       </tr>
     <% end %>
   </tbody>
