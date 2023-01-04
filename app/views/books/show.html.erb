@@ -58,7 +58,7 @@
       <!--コメントを投稿したユーザーの情報-->
       <td>
         <%= image_tag book_comment.user.get_profile_image, size:"60x60" %><br>
-        <%= link_to book_comment.user.name, user_path(current_user) %>
+        <%= link_to book_comment.user.name, user_path(@user) %>
       </td>
       <!--コメント内容-->
       <td>
