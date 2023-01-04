@@ -8,10 +8,16 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show, :edit, :create, :destroy, :update] do
   resources :book_comments, only: [:create, :destroy]
-   resource :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
   end
   
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    # 指定のユーザがフォローしている全員を表示する
+      get 'followings' => 'relationships#followings', as: 'followings'
+    # 指定のユーザをフォローしている全員を表示する
+      get 'followers' => 'relationships#followers', as: 'followers'
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
