@@ -1,0 +1,26 @@
+<!--コメント一覧が表示される部分-->
+
+<table>
+
+    <% book.book_comments.each do |book_comment| %>
+
+  <tr>
+  <!--コメントを投稿したユーザーの情報-->
+  <td>
+    <%= image_tag book_comment.user.get_profile_image, size:"60x60" %><br>
+    <%= link_to book_comment.user.name, user_path(book_comment.user) %>
+  </td>
+  <!--コメント内容-->
+  <td>
+    <%= book_comment.comment %>
+  </td>
+  <!--投稿したユーザーのみに表示される編集・削除ボタン-->
+  <td>
+  <% if book_comment.user == current_user %>
+  <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), class: "btn btn-sm btn-danger", method: :delete, remote: true %>
+  <% end %>
+  </td>
+  <% end %>
+  </tr>
+
+</table>
